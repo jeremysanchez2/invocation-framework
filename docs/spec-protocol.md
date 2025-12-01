@@ -1,11 +1,10 @@
-```markdown
-# Invocation Protocol — Specification v0.1
+# Invocation Protocol — Specification v0.1  
 Version: 0.1  
 Status: Draft (Public Technical Preview)  
 Maintainer: Imvara  
-Updated: 2025-12-01
+Updated: 2025-12-01  
 
-The Invocation Protocol defines the required output contract for all Invocation-compliant AI systems. It ensures that reasoning performed by any model—OpenAI, Anthropic, local LLMs, or agents—is deterministic, explainable, governed, reproducible, and safe for enterprise deployment.
+The Invocation Protocol defines the required output contract for all Invocation-compliant AI systems. It ensures that every model, vendor, or agent produces deterministic, explainable, enterprise-safe reasoning artifacts.
 
 ---
 
@@ -31,22 +30,24 @@ Invocation-compliant systems **must** return a JSON-LD object matching the machi
 
 `/invocation-protocol/invocation-protocol-v0.1.jsonld`
 
-### Required Fields
+---
+
+## Required Fields
 
 | Field | Type | Description |
-|-------|------|-------------|
+|-------|-------|-------------|
 | `decision_pathway_used` | string | Identifier of the executed Decision Pathway |
 | `entities_evaluated` | array<string> | Structured entity identifiers analyzed |
-| `signals_used` | array<string> | Signals referenced during reasoning |
+| `signals_used` | array<string> | Signals contributing to reasoning |
 | `constraints_applied` | array<string> | Hard and soft constraints applied |
 | `pathway_steps` | array<object> | Ordered execution trace |
-| `ranked_results` | array<object> | Final structured and ranked results |
+| `ranked_results` | array<object> | Final structured and ranked outputs |
 | `explanation_available` | boolean | Whether an explanation exists |
-| `explanation_reference` | string (optional) | URI pointer to explanation resource |
-| `confidence_score` | number (optional) | Model-level confidence estimate |
-| `safety_checks` | object | Safety validation results |
+| `explanation_reference` | string (optional) | URI for explanation resource |
+| `confidence_score` | number (optional) | Model-level confidence |
+| `safety_checks` | object | Structured safety validation results |
 
-All fields marked **required** MUST appear in every Invocation-compliant output.
+All fields marked **required** must appear in every Invocation-compliant output.
 
 ---
 
@@ -58,26 +59,26 @@ Invocation-compliant responses are validated against the following:
 All required fields must be present and non-null.
 
 ### 3.2 Type Validation  
-All fields must match their type definitions exactly.
+All fields must match their type definitions.
 
 ### 3.3 Entity & Signal Integrity  
 All referenced entities and signals must map to governed schemas.
 
-### 3.4 Deterministic Pathway
+### 3.4 Deterministic Pathway  
 Given identical inputs and constraints, the same pathway must be invoked.
 
 ### 3.5 Ranked Result Ordering  
-Results must be listed in descending relevance.
+Results must be sorted in descending relevance.
 
 ### 3.6 Explanation Rule  
-If `explanation_available` = true, `explanation_reference` must be provided.
+If `explanation_available = true`, an `explanation_reference` must be included.
 
 ### 3.7 Safety Validation Structure  
-`safety_checks` must include:
+`safety_checks` must define:
 
 - `disallowed_entities_filtered`  
 - `incomplete_signals_detected`  
-- `fallback_pathway_triggered`  
+- `fallback_pathway_triggered`
 
 ---
 
@@ -128,8 +129,7 @@ The test suite validates:
 
 ## 6. Versioning & Governance
 
-The Invocation Protocol is governed under the Imvara Invocation Framework.  
-Version changes follow:
+The Invocation Protocol follows the Imvara Invocation Framework rules for governance:
 
 - formal versioning  
 - public changelogs  
@@ -144,5 +144,4 @@ Version changes follow:
 - Entity Schema Registry  
 - Signal Schema  
 - Decision Pathway Schema  
-- Imvara Invocation Framework (Core)  
-```
+- Imvara Invocation Framework (Core)
