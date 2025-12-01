@@ -1,1 +1,68 @@
+{
+  "version": "0.1",
+  "updated": "2025-12-01",
+  "maintainer": "Imvara",
+  "description": "Test cases validating signal structures against invocation-signal-schema.json and domain-specific rules.",
 
+  "tests": [
+    {
+      "id": "signal_valid_product",
+      "description": "Valid signal structure for a product entity.",
+      "signals": {
+        "CADR_score": 300,
+        "filter_lifespan_months": 12,
+        "energy_usage_kwh": 0.30,
+        "rating_score": 4.8
+      },
+      "expected": {
+        "is_valid": true,
+        "missing_fields": [],
+        "invalid_types": [],
+        "schema_references": ["invocation-signal-schema.json"]
+      }
+    },
+
+    {
+      "id": "signal_missing_required_field",
+      "description": "Missing CADR_score, which is required for category air_purifier.",
+      "signals": {
+        "filter_lifespan_months": 10,
+        "rating_score": 4.2
+      },
+      "expected": {
+        "is_valid": false,
+        "missing_fields": ["CADR_score"],
+        "schema_references": ["invocation-signal-schema.json"]
+      }
+    },
+
+    {
+      "id": "signal_invalid_type",
+      "description": "Signal has invalid type: rating_score must be a number.",
+      "signals": {
+        "CADR_score": 200,
+        "rating_score": "excellent"
+      },
+      "expected": {
+        "is_valid": false,
+        "invalid_types": ["rating_score (expected number)"],
+        "schema_references": ["invocation-signal-schema.json"]
+      }
+    },
+
+    {
+      "id": "signal_extra_unrecognized_signal",
+      "description": "Contains an unknown, unrecognized signal field.",
+      "signals": {
+        "CADR_score": 250,
+        "rating_score": 4.5,
+        "mystery_metric": 999
+      },
+      "expected": {
+        "is_valid": false,
+        "unrecognized_fields": ["mystery_metric"],
+        "schema_references": ["invocation-signal-schema.json"]
+      }
+    }
+  ]
+}
