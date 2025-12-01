@@ -1,7 +1,7 @@
-# OpenAI Agent Invocation Example
+# Anthropic Agent Invocation Example
 **Imvara Invocation Framework — Agent Pattern Example**
 
-This example shows how an OpenAI-compatible agent (GPT-4.1, GPT-5, o-series, or Assistants API) should interpret and execute an invocation request using Imvara’s Invocation Architecture, Entity Schema, and Decision Pathway Model.
+This example shows how a Claude-compatible agent (Claude 3.5 Sonnet / Opus / Haiku, Tools API, or Messages API) interprets and executes an invocation request using Imvara’s Invocation Architecture, Entity Schema, and Decision Pathway Model.
 
 ---
 
@@ -11,40 +11,46 @@ This example shows how an OpenAI-compatible agent (GPT-4.1, GPT-5, o-series, or 
 
 ---
 
-## 2. Agent Workflow (OpenAI)
+## 2. Agent Workflow (Anthropic)
 
-OpenAI models follow a **function-first**, **schema-guided**, **reasoning-optional** flow.
+Claude models follow a **reasoning-first**, **schema-consistent**, **constitutional-explanation** flow.
 
-### Step 1 — Parse Intent
-- Detect domain: *retail*
-- Detect intent: *product_comparison*
-- Detect constraints:
-  - budget_max = 300
-  - use_case = allergies
+### Step 1 — Parse Intent (Claude reasoning)
+Claude generates a structured interpretation:
+
+```json
+{
+  "domain": "retail",
+  "intent": "product_comparison",
+  "constraints": {
+    "budget_max": 300,
+    "use_case": "allergies"
+  }
+}
+```
 
 ### Step 2 — Resolve Entity Classes
-Based on `invocation-entity-schema.json`:
+Using `invocation-entity-schema.json`:
 
 - **Product**
 - **Attribute** → allergen_filter_rating
 - **Signal** → CADR_score, filter_lifespan_months, noise_level_dB, rating_score
 
-### Step 3 — Fetch Structured Inputs
-(OpenAI agents typically call tools, APIs, or embeddings depending on setup.)
+### Step 3 — Call Tools (if enabled)
 
-Example tool call:
+Claude tool request:
 
 ```json
 {
   "tool": "fetch_products",
-  "arguments": {
+  "input": {
     "category": "air_purifier",
     "max_price": 300
   }
 }
 ```
 
-Example response:
+Tool returns:
 
 ```json
 {
@@ -79,28 +85,25 @@ Example response:
 
 ---
 
-## 3. Decision Pathway Execution
+## 3. Decision Pathway Execution (Claude Style)
 
-Using `invocation-decision-pathway-schema.json`:
+Claude prefers **reasoned scoring** over pure numeric weighting:
 
-### Weighted Scoring Strategy
 ```
-score = (0.35 * CADR_score_normalized)
-      + (0.25 * filter_lifespan_normalized)
-      + (0.20 * noise_level_inverse_normalized)
-      + (0.20 * rating_score_normalized)
+For allergy-sensitive users:
+- CADR_score is primary
+- Quiet operation is secondary
+- Filter lifespan and ratings confirm reliability
 ```
 
-Example computed outcome:
+Normalizing these signals produces:
 
 - PureAir A100 → **0.88**
 - BreezeCo SilentPro → **0.81**
 
-**Winner: PureAir A100**
-
 ---
 
-## 4. Structured Output (OpenAI Style)
+## 4. Structured Output (Anthropic Style)
 
 ```json
 {
@@ -109,17 +112,17 @@ Example computed outcome:
       "brand": "PureAir",
       "model": "A100",
       "price": 249,
-      "reasoning": {
-        "signals": {
-          "CADR_score": "High (210)",
-          "filter_lifespan_months": "Moderate (6 months)",
-          "noise_level_dB": "Quiet (28 dB)",
-          "rating_score": "Strong (4.6)"
-        },
-        "explanation": "Selected due to highest weighted score for allergy-focused purification under $300."
+      "explanation": {
+        "summary": "The PureAir A100 provides the strongest combination of CADR performance, quiet operation, and verified user ratings under $300.",
+        "signal_breakdown": {
+          "CADR_score": "210 (strong airflow)",
+          "noise_level_dB": "28 dB (quiet)",
+          "filter_lifespan_months": "6 months",
+          "rating_score": "4.6"
+        }
       }
     },
-    "alternatives_ranked": [
+    "ranked_alternatives": [
       {
         "brand": "BreezeCo",
         "model": "SilentPro",
@@ -127,8 +130,8 @@ Example computed outcome:
       }
     ],
     "invocation_meta": {
-      "intent": "product_comparison",
       "domain": "retail",
+      "intent": "product_comparison",
       "constraints": {
         "budget_max": 300,
         "use_case": "allergies"
@@ -141,10 +144,11 @@ Example computed outcome:
 ---
 
 ## 5. Key Invocation Properties Demonstrated
-- **Outcome-driven** → produces a definitive ranked recommendation  
-- **Entity-governed** → uses Product, Attribute, and Signal schemas  
-- **Signal-mediated** → normalizes and weights measurable factors  
-- **Transparent** → includes output reasoning and pathway metadata  
+
+- **Reasoning-first execution** → Claude explains each scoring step  
+- **Entity schema fidelity** → uses Product, Attribute, Signal classes  
+- **Bias-aware** → ensures transparent justification  
+- **Constitutional grounding** → aligns recommendation with safety principles  
 
 **This example demonstrates:  
-“How an OpenAI agent becomes structurally capable of Invocation.”**
+“How Claude becomes invokable through reasoning and schema fidelity.”**
