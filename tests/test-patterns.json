@@ -1,1 +1,15 @@
-
+{
+  "test_name": "Invocation Pattern Structural Validation",
+  "description": "Ensures invocation-patterns.json meets minimum definition requirements.",
+  "required_fields": [
+    "id",
+    "domain",
+    "intent_type",
+    "entities",
+    "signals",
+    "constraints",
+    "decision_strategy",
+    "outcome_type"
+  ],
+  "sample_valid_pattern_id": "retail.product_comparison"
+}
