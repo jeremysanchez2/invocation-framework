@@ -1,41 +1,33 @@
-# Imvara Invocation Framework — Specification Index  
+```markdown
+# Invocation Framework — Specification Index  
 Version: 0.1  
-Last Updated: 2025-12-01  
+Status: Draft (Public Technical Preview)  
 Maintainer: Imvara  
+Last Updated: 2025-12-01  
 
-The Imvara Invocation Framework defines a structured, deterministic, and machine-readable approach for making brands and organizations **invokable** by AI systems. This document provides an indexed entry point into all formal specifications required to implement Invocation Architecture, Invocation OS alignment, diagnostic tools, and Invocation Protocol v0.1.
+The Invocation Framework defines a unified architecture, protocol, and governance model for how AI systems interpret user intent, bind entities, resolve signals, and generate validated outputs that are trustworthy, explainable, and repeatable.
 
-The goal of this specification suite is to provide an industry-grade, open framework for AI–brand interoperability, enabling safe, predictable, and explainable invocation across OpenAI, Anthropic, Google Gemini, local LLMs, and agent runtimes.
-
----
-
-## 1. Specification Overview
-
-The Invocation Framework is composed of five core specifications:
-
-1. **Architecture Specification**  
-   Defines the machine-readable structure of Invocation: domains, intents, entities, signals, and decision pathways.
-
-2. **Governance Specification**  
-   Defines the rules, lifecycle management, version control, entity governance, and drift management for Invocation systems.
-
-3. **Pathways Specification**  
-   Defines how AI systems determine outcomes, including decision scoring, constraints, tradeoff logic, and final invocation resolution.
-
-4. **Validation Specification**  
-   Defines the protocol for verifying Invocation outputs, including deterministic checks, auditability, and compliance with Invocation Protocol v0.1.
-
-5. **Invocation Protocol v0.1**  
-   The required output contract for any agent, model, or runtime claiming Invocation compliance.
-
-Each spec is independently versioned and may evolve over time while maintaining backward compatibility.
+This document serves as the canonical index for all Invocation specifications. All normative references begin here.
 
 ---
 
-## 2. Directory Structure
-This index serves as the authoritative registry linking all underlying components of the Invocation Framework.
+## 1. Purpose of the Specification Suite
 
-```
+The Invocation Framework establishes:
+
+- A shared mental model for how invocation works inside AI systems.  
+- A standard architecture for entity binding, signal resolution, pathway execution, and output validation.  
+- A protocol that ensures invocation results are deterministic, governed, and verifiable.  
+- A governance system for maintaining schemas, pathways, and entity definitions over time.  
+- A public reference that creators, brands, engineers, and AI systems can rely on.
+
+The Framework is technology-agnostic and applies to LLMs, agents, local inference engines, and enterprise systems.
+
+---
+
+## 2. Specification Directory Structure
+
+```text
 /docs
 ├── spec-index.md
 ├── spec-architecture.md
@@ -51,76 +43,141 @@ This index serves as the authoritative registry linking all underlying component
 ├── invocation-os/
 ├── invocation-protocol/
 ```
----
-
-## 3. Compliance Levels
-
-Platforms, brands, and agents may self-assess or be audited against three levels of Invocation compliance.
-
-### **Level 1 — Structural Compliance (Crawl)**  
-The system correctly interprets and implements:
-- domain definitions  
-- intent detection  
-- entity schemas  
-- structured content models  
-
-### **Level 2 — Behavioral Compliance (Walk)**  
-The system deterministically applies:
-- decision pathways  
-- constraint handling  
-- signal weighting  
-- governance rules  
-- invocation readiness  
-
-### **Level 3 — Protocol Compliance (Run)**  
-The system fully conforms to:
-- Invocation Protocol v0.1  
-- deterministic invocation outputs  
-- traceability and auditability  
-- standardized explanation formatting  
 
 ---
 
-## 4. Invocation Standards Referenced
+## 3. The Invocation Stack (High-Level Overview)
 
-This index references and links out to the following specifications:
+~~~~mermaid
+flowchart TD
+    A[User Intent] --> B(Intent Interpreter)
+    B --> C(Entity Binder)
+    C --> D(Signal Resolver)
+    D --> E(Decision Pathway Engine)
+    E --> F(Validated Invocation Output)
+~~~~
 
-- Invocation Architecture Specification  
-- Entity Schema Definitions  
-- Signal Schema Definitions  
-- Decision Pathway Schema  
-- Invocation OS Specification  
-- Invocation Protocol v0.1  
-- Diagnostics & Drift Detection Guides  
-- Maturity Model (Crawl → Walk → Run)  
-- Example Integrations (OpenAI, Anthropic, Local LLM)  
-- Example Use Cases (Retail, Insurance, Automotive, Hospitality)
+Each subsystem is defined in detail in `spec-architecture.md`.
 
 ---
 
-## 5. Update Policy
+## 4. Invocation Framework Components
 
-The Invocation Framework adheres to the following update principles:
+### 4.1 Architecture Specification (`spec-architecture.md`)  
+Defines the Invocation Pipeline, subsystem responsibilities, data contracts, and operational guarantees.
 
-- **Semantic Versioning** (major.minor.patch)  
-- **Backward Compatibility Commitment** for all schema-defined structures  
-- **Determinism First** — changes must not alter the meaning of existing compliant systems  
-- **Audit Log Accessibility** through `/CHANGELOG.md`  
+### 4.2 Governance Specification (`spec-governance.md`)  
+Defines schema rules, entity governance, versioning, ownership, and change management.
 
-Major updates require consensus from the Imvara Specification Stewardship Group.
+### 4.3 Pathways Specification (`spec-pathways.md`)  
+Defines how decision pathways are constructed, executed, and validated.
 
----
-
-## 6. Author & Stewardship
-
-The Invocation Framework was created by **Jeremy Sanchez** and is maintained by **Imvara** as an open, industry-defining standard for the AI-native discovery and invocation landscape.
-
-For inquiries or contributions, see `/CONTRIBUTING.md`.
+### 4.4 Validation Specification (`spec-validation.md`)  
+Defines the Invocation Protocol — the required output format and validation rules.
 
 ---
 
-## 7. Next Steps
+## 5. Invocation Compliance Levels
 
-Continue to the next document:
+~~~~mermaid
+flowchart LR
+    A[Level 1: Descriptive] --> B[Level 2: Structured]
+    B --> C[Level 3: Fully Invocable]
+~~~~
 
-👉 **/docs/spec-architecture.md**
+### Level 1 — Descriptive  
+Unstructured or loosely structured content. Informational only.
+
+### Level 2 — Structured  
+Entity definitions and signals partially aligned to Invocation requirements.
+
+### Level 3 — Fully Invocable  
+Meets all requirements of the Invocation Protocol. Deterministic and agent-ready.
+
+---
+
+## 6. Versioning, Compatibility, and Stability
+
+The Framework follows:
+
+- Major versions → breaking changes  
+- Minor versions → additive changes  
+- Patch versions → clarifications only  
+
+All specifications must document migration guides for any breaking changes.
+
+---
+
+## 7. Referenced Specifications
+
+The Invocation Framework draws non-normative inspiration from:
+
+- Schema.org  
+- JSON Schema  
+- OpenAPI  
+- W3C Web Architecture  
+- Model Context Protocol  
+- OAuth 2.1  
+- Industry-standard decision frameworks  
+
+Invocation is a new category, not a derivative standard.
+
+---
+
+## 8. Reading Order Recommendation
+
+**For implementers:**
+
+1. `spec-architecture.md`  
+2. `spec-pathways.md`  
+3. `spec-governance.md`  
+4. `spec-validation.md`  
+
+**For executives:**
+
+- Start with this file  
+- Then review architecture diagrams in `spec-architecture.md`  
+
+---
+
+## 9. Glossary of Terms
+
+Full glossary lives in `/specs/definitions/`.
+
+Core terms include:
+
+- Invocation — The act of an AI system selecting, binding, and operationalizing entities to satisfy user intent.  
+- Entity — A structured, machine-readable representation of a product, service, or concept.  
+- Signal — A measurable, comparable attribute used by the decision pathway.  
+- Pathway — A formal decision model defining how results should be ranked or recommended.  
+- Invocation Protocol — The required output contract of a validated invocation.  
+
+---
+
+## 10. Contributing & Change Requests
+
+Changes must follow the governance rules in `spec-governance.md`.
+
+Accepted contributions include:
+
+- New entity schemas  
+- New signals  
+- Pathway definitions  
+- Diagnostic suites  
+- Clarifications  
+- Examples  
+
+---
+
+## 11. License
+
+Apache 2.0 License.
+
+---
+
+## 12. Maintainer
+
+Imvara  
+Lead Author: Jeremy Sanchez  
+Website: https://imvara.io
+```
