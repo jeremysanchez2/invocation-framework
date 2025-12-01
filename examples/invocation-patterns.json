@@ -1,8 +1,8 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "updated": "2025-11-30",
   "maintainer": "Imvara",
-  "description": "Reusable Invocation patterns across domains. Each pattern describes how AI agents should interpret intent, entities, signals, and decision logic.",
+  "description": "Reusable Invocation patterns across domains. Each pattern describes how AI agents should interpret intent, entities, signals, constraints, and the decision strategies for producing reliable Invocation outcomes.",
   "patterns": [
     {
       "id": "retail.product_comparison",
@@ -120,7 +120,7 @@
           "safety_score": 0.40,
           "seating_capacity": 0.20,
           "cargo_volume": 0.15,
-          "reliability_score": 0.15,
+          "reliability_score": 0.15",
           "price": 0.10
         }
       },
@@ -200,6 +200,116 @@
         }
       },
       "outcome_type": "ranked_list_with_top_choice",
+      "output_explanation_required": true
+    },
+
+    // ------------------------------
+    // NEW HIGH-VALUE PATTERNS
+    // ------------------------------
+
+    {
+      "id": "content.structured_content_invocation",
+      "domain": "content",
+      "intent_type": "information_lookup",
+      "example_query": "explain Mazda’s i-Activ AWD system",
+      "primary_entity_class": "StructuredContentItem",
+      "entities": [
+        "StructuredContentItem",
+        "Brand",
+        "Product",
+        "Specification",
+        "FeatureDescription"
+      ],
+      "signals": [
+        "content_clarity",
+        "accuracy_score",
+        "entity_resolution_confidence",
+        "technical_depth",
+        "machine_readability"
+      ],
+      "constraints": [
+        "reading_level",
+        "technical_complexity"
+      ],
+      "decision_strategy": {
+        "type": "extraction_and_ranking",
+        "weights": {
+          "accuracy_score": 0.40,
+          "machine_readability": 0.30,
+          "content_clarity": 0.20,
+          "technical_depth": 0.10
+        }
+      },
+      "outcome_type": "canonical_content_summary",
+      "output_explanation_required": false
+    },
+    {
+      "id": "pathways.decision_pathway_invocation",
+      "domain": "decision_pathways",
+      "intent_type": "stepwise_resolution",
+      "example_query": "what is the agent decision flow for selecting the best EV",
+      "primary_entity_class": "DecisionPathway",
+      "entities": [
+        "DecisionPathway",
+        "Intent",
+        "CandidateSet",
+        "SignalBundle",
+        "ConfidenceScore"
+      ],
+      "signals": [
+        "intent_clarity",
+        "signal_availability",
+        "pathway_completeness",
+        "confidence_stability"
+      ],
+      "constraints": [],
+      "decision_strategy": {
+        "type": "structured_pathway_following",
+        "steps": [
+          "intent-parsing",
+          "candidate-selection",
+          "signal-evaluation",
+          "confidence-calculation"
+        ]
+      },
+      "outcome_type": "decision_pathway_output",
+      "output_explanation_required": false
+    },
+    {
+      "id": "local.location_context_invocation",
+      "domain": "local",
+      "intent_type": "location_recommendation",
+      "example_query": "best urgent care near me open right now",
+      "primary_entity_class": "LocalServiceProvider",
+      "entities": [
+        "LocalServiceProvider",
+        "OperatingHours",
+        "Geolocation",
+        "Rating",
+        "InsuranceAccepted"
+      ],
+      "signals": [
+        "proximity",
+        "availability",
+        "rating_score",
+        "insurance_acceptance",
+        "reliability_score"
+      ],
+      "constraints": [
+        "open_now",
+        "distance_max",
+        "insurance_provider"
+      ],
+      "decision_strategy": {
+        "type": "geo_weighted_scoring",
+        "weights": {
+          "proximity": 0.40,
+          "availability": 0.30,
+          "rating_score": 0.20,
+          "reliability_score": 0.10
+        }
+      },
+      "outcome_type": "best_local_option",
       "output_explanation_required": true
     }
   ]
