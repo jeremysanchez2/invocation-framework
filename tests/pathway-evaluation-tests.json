@@ -1,1 +1,13 @@
-
+{
+  "decision_pathway_tests": [
+    {
+      "intent": "best suv for snow",
+      "expected_steps": [
+        "intent-parsing",
+        "candidate-selection",
+        "signal-evaluation",
+        "confidence-calculation"
+      ]
+    }
+  ]
+}
