@@ -1,13 +1,27 @@
 {
-  "entity_audit_tests": [
-    {
-      "entity": "mazda_cx5_2025",
-      "checks": [
-        "schema_completeness",
-        "signal_presence",
-        "metadata_accuracy",
-        "governance_owner_exists"
-      ]
+  "test_name": "Entity Governance Audit",
+  "version": "0.1",
+  "description": "Validates that all entities meet the requirements defined in Invocation Architecture’s Entity Governance specification.",
+  "expected_requirements": {
+    "required_fields": ["id", "type", "name", "attributes", "provenance"],
+    "provenance_fields": ["source", "last_updated", "confidence"],
+    "attribute_rules": {
+      "no_empty_values": true,
+      "attribute_keys_must_match_schema": true
     }
-  ]
+  },
+  "sample_valid_entity": {
+    "id": "vehicle_293",
+    "type": "Vehicle",
+    "name": "Mazda CX-50",
+    "attributes": {
+      "fuel_efficiency_mpg": 30,
+      "safety_rating": 4.9
+    },
+    "provenance": {
+      "source": "manufacturer",
+      "last_updated": "2025-10-01",
+      "confidence": 0.98
+    }
+  }
 }
