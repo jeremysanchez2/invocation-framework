@@ -1,1 +1,78 @@
-
+{
+  "schema_name": "InvocationDecisionPathway",
+  "version": "0.1",
+  "description": "Standard form for describing how AI agents should evaluate and select entities for Invocation.",
+  "fields": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the decision pathway.",
+      "required": true
+    },
+    "domain": {
+      "type": "string",
+      "description": "Domain context (e.g., retail, insurance, automotive, hospitality, generic).",
+      "required": true
+    },
+    "intent_type": {
+      "type": "string",
+      "description": "Type of user intent this pathway is designed for (e.g., product_comparison, plan_recommendation).",
+      "required": true
+    },
+    "primary_entity_class": {
+      "type": "string",
+      "description": "Main entity type involved in the decision.",
+      "required": true
+    },
+    "constraints": {
+      "type": "array",
+      "description": "List of constraints the agent must respect (e.g., budget_max, safety_priority).",
+      "items": {
+        "type": "string"
+      },
+      "required": false
+    },
+    "signals": {
+      "type": "array",
+      "description": "List of signal names used in this pathway.",
+      "items": {
+        "type": "string"
+      },
+      "required": true
+    },
+    "decision_strategy": {
+      "type": "object",
+      "description": "How the agent should combine signals and constraints.",
+      "fields": {
+        "type": {
+          "type": "string",
+          "description": "Strategy type (e.g., weighted_scoring, utility_optimization, rule_based).",
+          "required": true
+        },
+        "weights": {
+          "type": "object",
+          "description": "Optional weight map where each key is a signal name and each value is a weight from 0.0 to 1.0.",
+          "required": false
+        },
+        "rules": {
+          "type": "array",
+          "description": "Optional rule set for hard constraints (e.g., must have safety_score >= 4.5).",
+          "items": {
+            "type": "string"
+          },
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "outcome_type": {
+      "type": "string",
+      "description": "Expected output format (e.g., ranked_recommendation, best_fit_plan, top_choice_with_rationale).",
+      "required": true
+    },
+    "explanation_required": {
+      "type": "boolean",
+      "description": "Whether the agent should provide a human-readable explanation of the decision.",
+      "required": true
+    }
+  }
+}
