@@ -1,1 +1,21 @@
-
+{
+  "test_name": "Signal Schema Validation",
+  "required_signal_fields": [
+    "name",
+    "value",
+    "unit",
+    "source",
+    "trust_score"
+  ],
+  "value_rules": {
+    "trust_score_min": 0,
+    "trust_score_max": 1
+  },
+  "sample_valid_signal": {
+    "name": "safety_rating",
+    "value": 4.8,
+    "unit": "stars",
+    "source": "NHTSA",
+    "trust_score": 0.94
+  }
+}
