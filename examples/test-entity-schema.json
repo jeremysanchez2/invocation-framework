@@ -1,1 +1,135 @@
+{
+  "version": "0.1",
+  "updated": "2025-12-01",
+  "maintainer": "Imvara",
+  "description": "Test cases validating entity definitions against the Invocation Entity Schema and related domain schemas.",
 
+  "tests": [
+    {
+      "id": "product_basic_valid",
+      "description": "Valid product entity containing all required fields as defined in product-schema.json and invocation-entity-schema.json.",
+      "entity": {
+        "entity_class": "Product",
+        "entity_id": "prod_001",
+        "name": "CleanAir Pro Purifier",
+        "brand": "AirWell",
+        "attributes": {
+          "category": "air_purifier",
+          "room_size": "large",
+          "noise_level_db": 28
+        },
+        "signals": {
+          "CADR_score": 320,
+          "filter_lifespan_months": 12,
+          "energy_usage_kwh": 0.34,
+          "rating_score": 4.7
+        }
+      },
+      "expected": {
+        "is_valid": true,
+        "missing_fields": [],
+        "schema_references": [
+          "invocation-entity-schema.json",
+          "product-schema.json"
+        ]
+      }
+    },
+
+    {
+      "id": "product_missing_required_signal",
+      "description": "Product is missing CADR_score, which is required in product-schema.json.",
+      "entity": {
+        "entity_class": "Product",
+        "entity_id": "prod_002",
+        "name": "PureHome Air Filter",
+        "brand": "FreshFlow",
+        "attributes": {
+          "category": "air_purifier"
+        },
+        "signals": {
+          "filter_lifespan_months": 10,
+          "rating_score": 4.3
+        }
+      },
+      "expected": {
+        "is_valid": false,
+        "missing_fields": ["signals.CADR_score"],
+        "schema_references": [
+          "invocation-entity-schema.json",
+          "product-schema.json"
+        ]
+      }
+    },
+
+    {
+      "id": "service_basic_valid",
+      "description": "A valid example of a service entity that conforms to service-schema.json.",
+      "entity": {
+        "entity_class": "Service",
+        "entity_id": "svc_101",
+        "name": "Premium Installation",
+        "provider": "AirWell",
+        "attributes": {
+          "category": "home_installation",
+          "duration_minutes": 120
+        },
+        "signals": {
+          "completion_rate": 0.98,
+          "avg_completion_time_minutes": 115,
+          "rating_score": 4.9
+        }
+      },
+      "expected": {
+        "is_valid": true,
+        "missing_fields": [],
+        "schema_references": [
+          "invocation-entity-schema.json",
+          "service-schema.json"
+        ]
+      }
+    },
+
+    {
+      "id": "invalid_unknown_entity_class",
+      "description": "Entity uses an undefined entity_class that does not exist in invocation-entity-schema.json.",
+      "entity": {
+        "entity_class": "Machine", 
+        "entity_id": "mach_invalid_01",
+        "name": "Unknown Machine"
+      },
+      "expected": {
+        "is_valid": false,
+        "missing_fields": ["entity_class (not recognized)"],
+        "schema_references": [
+          "invocation-entity-schema.json"
+        ]
+      }
+    },
+
+    {
+      "id": "product_invalid_signal_type",
+      "description": "A product where CADR_score is incorrectly given as a string rather than a number.",
+      "entity": {
+        "entity_class": "Product",
+        "entity_id": "prod_003",
+        "name": "EcoBreeze Tower Fan",
+        "brand": "EcoBreeze",
+        "attributes": {
+          "category": "fan"
+        },
+        "signals": {
+          "CADR_score": "high",  
+          "rating_score": 4.0
+        }
+      },
+      "expected": {
+        "is_valid": false,
+        "missing_fields": ["signals.CADR_score (invalid type: expected number)"],
+        "schema_references": [
+          "invocation-entity-schema.json",
+          "product-schema.json"
+        ]
+      }
+    }
+  ]
+}
