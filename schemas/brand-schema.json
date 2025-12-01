@@ -1,1 +1,43 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Invocation Brand Schema",
+  "description": "Canonical machine-readable definition of a brand entity for Invocation systems.",
+  "type": "object",
+  "properties": {
+    "brand_id": { "type": "string", "description": "Unique brand identifier (UUID or slug)." },
+    "name": { "type": "string", "description": "Official brand name." },
+    "description": { "type": "string" },
+    "category": { 
+      "type": "string",
+      "description": "Primary industry category (NAICS-aligned optional)."
+    },
+    "logo_url": { "type": "string", "format": "uri" },
+    "homepage": { "type": "string", "format": "uri" },
+    "regions_served": { 
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Geographic markets."
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "entity_owner": { "type": "string" },
+        "data_steward": { "type": "string" },
+        "last_verified": { "type": "string", "format": "date" }
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": { "$ref": "invocation-signal-schema.json" }
+    },
+    "products": {
+      "type": "array",
+      "items": { "$ref": "product-schema.json" }
+    },
+    "services": {
+      "type": "array",
+      "items": { "$ref": "service-schema.json" }
+    }
+  },
+  "required": ["brand_id", "name"]
+}
