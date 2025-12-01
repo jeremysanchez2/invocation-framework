@@ -1,1 +1,15 @@
-
+{
+  "schemas": [
+    "invocation-entity-schema.json",
+    "invocation-signal-schema.json",
+    "invocation-decision-pathway-schema.json",
+    "brand-schema.json",
+    "product-schema.json",
+    "service-schema.json",
+    "invocation-event-schema.json",
+    "graph-relations.json"
+  ],
+  "version": "0.1",
+  "maintainer": "Imvara",
+  "description": "Index of all Invocation Framework machine schemas."
+}
