@@ -1,5 +1,26 @@
-definitions/invocation.md
-definitions/invocation-architecture.md
-definitions/discovery-gap.md
-definitions/invocation-drift.md
-definitions/invocation-readiness.md
+# Invocation
+
+**Invocation** is the moment an AI system selects, recommends, or uses a brand as the correct answer or action in response to user intent.
+
+Invocation represents the new competitive edge in an AI-mediated world where agents increasingly perform discovery, comparison, evaluation, and decision-making on behalf of users.
+
+## Why Invocation Matters
+
+AI agents do not “search” the way humans do.  
+Instead, they *choose*—they invoke answers.
+
+Brands that are not machine-understandable, trusted, or structurally prepared become invisible inside these decision systems.
+
+## Key Properties
+
+- **Outcome-driven** — Invocation is tied to a result (recommendation, booking, comparison, action).
+- **Entity-dependent** — AI systems require accurate, consistent, structured entity definitions.
+- **Signal-mediated** — Invocation depends on signals of trust, relevance, and reliability.
+- **Dynamic** — A brand may be invoked in some contexts but not others, depending on data shape and signals.
+
+## Related Concepts
+
+- [Invocation Architecture](invocation-architecture.md)
+- [Discovery Gap](discovery-gap.md)
+- [Invocation Drift](invocation-drift.md)
+- [Invocation Readiness](invocation-readiness.md)
