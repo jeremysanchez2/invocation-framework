@@ -1,1 +1,82 @@
+{
+  "version": "0.1",
+  "updated": "2025-12-01",
+  "maintainer": "Imvara",
+  "description": "Test cases verifying decision logic evaluation using invocation-decision-pathway-schema.json.",
 
+  "tests": [
+    {
+      "id": "valid_weighted_scoring_pathway",
+      "description": "A correct weighted scoring pathway for ranking products.",
+      "decision_pathway": {
+        "type": "weighted_scoring",
+        "weights": {
+          "CADR_score": 0.40,
+          "rating_score": 0.30,
+          "price": 0.20,
+          "noise_level_db": 0.10
+        }
+      },
+      "expected": {
+        "is_valid": true,
+        "missing_fields": [],
+        "invalid_types": [],
+        "schema_references": ["invocation-decision-pathway-schema.json"]
+      }
+    },
+
+    {
+      "id": "invalid_sum_of_weights",
+      "description": "Weights do not add up to 1.0, violating pathway contract.",
+      "decision_pathway": {
+        "type": "weighted_scoring",
+        "weights": {
+          "CADR_score": 0.50,
+          "rating_score": 0.50,
+          "price": 0.10
+        }
+      },
+      "expected": {
+        "is_valid": false,
+        "errors": ["weights must total exactly 1.0"],
+        "schema_references": ["invocation-decision-pathway-schema.json"]
+      }
+    },
+
+    {
+      "id": "missing_required_weight",
+      "description": "CADR_score required by schema but not present.",
+      "decision_pathway": {
+        "type": "weighted_scoring",
+        "weights": {
+          "rating_score": 0.60,
+          "price": 0.40
+        }
+      },
+      "expected": {
+        "is_valid": false,
+        "missing_fields": ["weights.CADR_score"],
+        "schema_references": ["invocation-decision-pathway-schema.json"]
+      }
+    },
+
+    {
+      "id": "invalid_type_for_weight_value",
+      "description": "Weight value must be a number, not a string.",
+      "decision_pathway": {
+        "type": "weighted_scoring",
+        "weights": {
+          "CADR_score": "high",
+          "rating_score": 0.30,
+          "price": 0.20,
+          "noise_level_db": 0.10
+        }
+      },
+      "expected": {
+        "is_valid": false,
+        "invalid_types": ["weights.CADR_score (expected number)"],
+        "schema_references": ["invocation-decision-pathway-schema.json"]
+      }
+    }
+  ]
+}
