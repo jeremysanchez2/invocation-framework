@@ -1,1 +1,16 @@
-
+{
+  "invocation_patterns": [
+    {
+      "domain": "retail",
+      "intent": "best product",
+      "entities": ["Product", "Brand", "Attribute"],
+      "signals": ["trust", "relevance", "availability"]
+    },
+    {
+      "domain": "insurance",
+      "intent": "quote comparison",
+      "entities": ["Plan", "Coverage", "RiskProfile"],
+      "signals": ["accuracy", "financial_strength"]
+    }
+  ]
+}
