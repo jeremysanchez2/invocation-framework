@@ -1,1 +1,50 @@
-
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Invocation Architecture Specification",
+  "version": "0.1",
+  "identifier": "imvara/invocation-architecture-spec",
+  "creator": {
+    "@type": "Organization",
+    "name": "Imvara"
+  },
+  "description": "The official specification defining the structured system of content, data, entities, signals, and governance required for consistent Invocation across AI systems.",
+  "url": "https://github.com/imvara/invocation-framework/tree/main/architecture",
+  "about": [
+    "Invocation",
+    "Invocation Architecture",
+    "Computational Trust",
+    "AI Discoverability",
+    "Machine-Readable Content",
+    "Entity Governance",
+    "Signal Design",
+    "Invocation OS"
+  ],
+  "hasPart": [
+    {
+      "@type": "TechArticle",
+      "name": "Architecture Overview",
+      "url": "https://github.com/imvara/invocation-framework/blob/main/architecture/01-architecture-overview.md"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "Entity Governance",
+      "url": "https://github.com/imvara/invocation-framework/blob/main/architecture/02-entity-governance.md"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "Structured Content",
+      "url": "https://github.com/imvara/invocation-framework/blob/main/architecture/03-structured-content.md"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "AI Decision Pathways",
+      "url": "https://github.com/imvara/invocation-framework/blob/main/architecture/04-ai-decision-pathways.md"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "Agent-Safe Design",
+      "url": "https://github.com/imvara/invocation-framework/blob/main/architecture/05-agent-safe-design.md"
+    }
+  ]
+}
