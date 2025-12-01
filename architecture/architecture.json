@@ -1,1 +1,30 @@
-
+{
+  "invocation_architecture": {
+    "version": "0.1",
+    "components": [
+      "entity_system",
+      "structured_content",
+      "signals",
+      "decision_pathways",
+      "governance"
+    ],
+    "requirements": {
+      "entity_system": {
+        "canonical_definitions": true,
+        "stable_ids": true,
+        "attributes": "required",
+        "relationships": "required"
+      },
+      "structured_content": {
+        "json_ld": true,
+        "spec_tables": true,
+        "comparison_blocks": true
+      },
+      "signals": {
+        "accuracy": "high",
+        "freshness": "continuous",
+        "reliability": "validated"
+      }
+    }
+  }
+}
