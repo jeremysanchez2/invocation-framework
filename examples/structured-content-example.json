@@ -1,1 +1,38 @@
-
+{
+  "entity_id": "mazda_cx5_2025",
+  "entity_type": "product",
+  "structured_content": {
+    "title": "2025 Mazda CX-5",
+    "description": "A compact SUV designed for performance, safety, and everyday utility.",
+    "core_features": [
+      "i-Activ All-Wheel Drive",
+      "Skyactiv-G 2.5 Turbo engine",
+      "Mazda Radar Cruise Control",
+      "Wireless Apple CarPlay / Android Auto"
+    ],
+    "usage_contexts": [
+      "daily commuting",
+      "family travel",
+      "light off-road capability",
+      "safety-first driving"
+    ],
+    "benefits": [
+      "exceptional handling",
+      "high safety ratings",
+      "premium interior experience",
+      "strong resale value"
+    ]
+  },
+  "invocation_signals": [
+    {
+      "signal_type": "authority",
+      "source": "NHTSA Safety Rating",
+      "value": "5 stars"
+    },
+    {
+      "signal_type": "experience",
+      "source": "Consumer Reviews",
+      "value": "4.8 average rating"
+    }
+  ]
+}
