@@ -1,13 +1,19 @@
-{
-  "decision_pathway_tests": [
-    {
-      "intent": "best suv for snow",
-      "expected_steps": [
-        "intent-parsing",
-        "candidate-selection",
-        "signal-evaluation",
-        "confidence-calculation"
-      ]
-    }
-  ]
+{{
+  "test_name": "Decision Pathway Evaluation",
+  "description": "Verifies multi-step decision flows defined in 04-ai-decision-pathways.md.",
+  "sample_pathway": {
+    "intent": "product_comparison",
+    "steps": [
+      "parse_intent",
+      "resolve_entity_classes",
+      "gather_required_signals",
+      "apply_weighting_model",
+      "produce_ranked_list"
+    ]
+  },
+  "validation_rules": {
+    "minimum_steps": 5,
+    "required_steps": ["parse_intent", "apply_weighting_model", "produce_ranked_list"],
+    "no_missing_signals": true
+  }
 }
