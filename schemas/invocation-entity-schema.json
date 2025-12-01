@@ -1,1 +1,65 @@
-
+{
+  "schema_name": "InvocationEntity",
+  "version": "0.1",
+  "description": "Canonical shape of an entity used within Invocation Architecture.",
+  "fields": {
+    "id": {
+      "type": "string",
+      "description": "Stable, unique identifier for the entity (preferably globally unique within the brand).",
+      "required": true
+    },
+    "entity_class": {
+      "type": "string",
+      "description": "The type or class of entity (e.g., Product, Plan, Vehicle, Hotel, Service).",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the entity.",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Short, precise description optimized for both humans and AI.",
+      "required": true
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Key-value map of entity attributes used in Invocation (e.g., protein_per_serving, premium_amount).",
+      "required": true
+    },
+    "relationships": {
+      "type": "array",
+      "description": "List of relationships to other entities (e.g., part_of, compares_to, owned_by).",
+      "items": {
+        "type": "object",
+        "fields": {
+          "type": {
+            "type": "string",
+            "description": "Relationship type (e.g., part_of, composed_of, compares_to)."
+          },
+          "target_entity_id": {
+            "type": "string",
+            "description": "ID of the related entity."
+          }
+        }
+      },
+      "required": false
+    },
+    "source_of_truth": {
+      "type": "string",
+      "description": "Primary system or dataset where this entity is governed.",
+      "required": false
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status (e.g., active, deprecated, draft).",
+      "required": false
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO 8601 timestamp for last update.",
+      "required": false
+    }
+  }
+}
