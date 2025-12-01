@@ -1,1 +1,66 @@
-
+{
+  "schema_name": "InvocationSignal",
+  "version": "0.1",
+  "description": "Standardized representation of a signal used by AI agents to evaluate and compare entities.",
+  "fields": {
+    "name": {
+      "type": "string",
+      "description": "Machine name of the signal (e.g., price_per_serving, safety_score, wifi_speed).",
+      "required": true
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable label for the signal.",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "description": "What the signal represents and how it is interpreted.",
+      "required": true
+    },
+    "data_type": {
+      "type": "string",
+      "description": "Data type (e.g., integer, float, boolean, string, enum).",
+      "required": true
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measurement when relevant (e.g., USD, g, Mbps, score_0_100).",
+      "required": false
+    },
+    "source_system": {
+      "type": "string",
+      "description": "System or process where this signal is generated or maintained.",
+      "required": false
+    },
+    "refresh_frequency": {
+      "type": "string",
+      "description": "How often the signal is updated (e.g., real_time, daily, weekly, monthly).",
+      "required": false
+    },
+    "critical_for_invocation": {
+      "type": "boolean",
+      "description": "Whether this signal is critical for Invocation in at least one decision pathway.",
+      "required": true
+    },
+    "valid_range": {
+      "type": "object",
+      "description": "Optional definition of valid range or allowed values.",
+      "fields": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "allowed_values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": false
+    }
+  }
+}
