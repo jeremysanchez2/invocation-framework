@@ -1,1 +1,206 @@
+{
+  "@context": {
+    "inv": "https://imvara.io/invocation-framework#",
+    "schema": "https://schema.org/",
+    "type": "@type",
+    "id": "@id"
+  },
 
+  "id": "inv:GraphRelations",
+  "type": "inv:InvocationKnowledgeGraph",
+  "version": "0.1",
+  "maintainer": "Imvara",
+  "updated": "2025-12-01",
+
+  "description": "The canonical Invocation Knowledge Graph (IKG). Defines all core entities, relationships, signals, constraints, pathways, validation rules, and system interactions used in Invocation-compliant AI systems.",
+
+  "graph": {
+
+    "core_entities": [
+      {
+        "id": "inv:Intent",
+        "type": "inv:EntityClass",
+        "description": "Represents the user's goal, expressed in natural language.",
+        "requires": ["inv:Domain", "inv:IntentType", "inv:Constraints"],
+        "feeds": ["inv:EntityBinder"]
+      },
+      {
+        "id": "inv:Entity",
+        "type": "inv:EntityClass",
+        "description": "A structured object evaluated in decision-making.",
+        "requires": ["inv:Signals"],
+        "depends_on": ["inv:EntitySchema"],
+        "feeds": ["inv:DecisionPathway"]
+      },
+      {
+        "id": "inv:Signal",
+        "type": "inv:AttributeClass",
+        "description": "A factual, atomic data point used in computation.",
+        "derives_from": "inv:SignalSource",
+        "feeds": ["inv:DecisionPathway", "inv:Validator"]
+      },
+      {
+        "id": "inv:Constraint",
+        "type": "inv:ConstraintRule",
+        "description": "A mandatory condition that filters or restricts valid decisions.",
+        "feeds": ["inv:DecisionPathway"],
+        "validates": ["inv:PathwayResult"]
+      },
+      {
+        "id": "inv:DecisionPathway",
+        "type": "inv:PathwayClass",
+        "description": "A deterministic reasoning model used to compute outcomes.",
+        "requires": ["inv:Entity", "inv:Signals", "inv:Constraints"],
+        "produces": ["inv:PathwayResult"],
+        "validates": ["inv:Validator"]
+      },
+      {
+        "id": "inv:Validator",
+        "type": "inv:ValidationLayer",
+        "description": "Ensures Invocation outputs conform to the Invocation Protocol.",
+        "requires": ["inv:ProtocolSchema"],
+        "produces": ["inv:ValidatedOutput"]
+      },
+      {
+        "id": "inv:InvocationProtocol",
+        "type": "inv:Specification",
+        "description": "The output contract defining required structure and metadata.",
+        "requires": ["inv:Validator"],
+        "feeds": ["inv:InvocationOS"]
+      },
+      {
+        "id": "inv:InvocationOS",
+        "type": "inv:SystemLayer",
+        "description": "The orchestration layer that governs Invocation across agents, models, and pipelines.",
+        "requires": ["inv:InvocationProtocol", "inv:GraphRelations"]
+      }
+    ],
+
+    "entity_schemas": [
+      {
+        "id": "inv:EntitySchema",
+        "type": "inv:Schema",
+        "description": "Defines structure and required signals for a given entity class.",
+        "fields": ["id", "name", "attributes", "signals_required", "relations"]
+      }
+    ],
+
+    "relationship_types": [
+      {
+        "id": "inv:requires",
+        "description": "Indicates a dependency that must exist prior to execution."
+      },
+      {
+        "id": "inv:depends_on",
+        "description": "Indicates a structural or upstream requirement."
+      },
+      {
+        "id": "inv:feeds",
+        "description": "Indicates downstream flow of data or logic."
+      },
+      {
+        "id": "inv:produces",
+        "description": "Indicates what an element outputs into the next step."
+      },
+      {
+        "id": "inv:validates",
+        "description": "Indicates an element that performs correctness or compliance checks."
+      },
+      {
+        "id": "inv:derives_from",
+        "description": "Indicates that a value or signal is derived from upstream sources."
+      }
+    ],
+
+    "decision_pathway_templates": [
+      {
+        "id": "inv:WeightedScoringPathway",
+        "type": "inv:DecisionPathway",
+        "description": "Computes scores for entities using weighted metrics.",
+        "requires": ["inv:Signals", "inv:Constraints"],
+        "produces": ["inv:RankedResults"]
+      },
+      {
+        "id": "inv:UtilityOptimizationPathway",
+        "type": "inv:DecisionPathway",
+        "description": "Optimizes outcomes based on multi-variable utility functions.",
+        "requires": ["inv:Signals", "inv:Constraints"],
+        "produces": ["inv:BestFitResult"]
+      },
+      {
+        "id": "inv:ConstraintEliminationPathway",
+        "type": "inv:DecisionPathway",
+        "description": "Filters entities by hard constraints before scoring.",
+        "requires": ["inv:Constraints"],
+        "produces": ["inv:FilteredEntities"]
+      },
+      {
+        "id": "inv:PolicyEvaluationPathway",
+        "type": "inv:DecisionPathway",
+        "description": "Evaluates binary compliance questions using governed rules.",
+        "requires": ["inv:Constraints", "inv:PolicySchema"],
+        "produces": ["inv:PolicyDecision"]
+      }
+    ],
+
+    "domains": [
+      "inv:Retail",
+      "inv:Insurance",
+      "inv:Healthcare",
+      "inv:Automotive",
+      "inv:Travel",
+      "inv:Finance",
+      "inv:Enterprise",
+      "inv:Compliance",
+      "inv:Hospitality"
+    ],
+
+    "domain_profiles": {
+      "inv:Retail": {
+        "common_entities": ["inv:Product", "inv:NutritionProfile", "inv:Brand"],
+        "common_signals": ["price", "rating_score", "availability"]
+      },
+      "inv:Insurance": {
+        "common_entities": ["inv:Plan", "inv:Coverage", "inv:Deductible"],
+        "common_signals": ["premium_amount", "network_size", "risk_profile"]
+      },
+      "inv:Healthcare": {
+        "common_entities": ["inv:Provider", "inv:Specialty"],
+        "common_signals": ["credential_score", "availability", "distance"]
+      }
+    },
+
+    "trigger_conditions": [
+      {
+        "id": "inv:TriggerComparison",
+        "description": "Activated when the user asks to compare multiple entities.",
+        "keywords": ["best", "compare", "top", "rank", "recommend"]
+      },
+      {
+        "id": "inv:TriggerRisk",
+        "description": "Activated when evaluating uncertainty or probability.",
+        "keywords": ["risk", "likelihood", "probability"]
+      },
+      {
+        "id": "inv:TriggerCompliance",
+        "description": "Activated when evaluating rules or policies.",
+        "keywords": ["allowed", "permitted", "violation", "policy"]
+      }
+    ],
+
+    "validation_layers": [
+      {
+        "id": "inv:OutputValidator",
+        "type": "inv:Validator",
+        "description": "Applies Invocation Protocol checks to ensure structural integrity.",
+        "checks": [
+          "required_fields_present",
+          "signals_resolved",
+          "constraints_applied",
+          "decision_path_recorded",
+          "explanation_available"
+        ]
+      }
+    ]
+  }
+}
