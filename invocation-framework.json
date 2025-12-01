@@ -1,1 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Imvara Invocation Framework",
+  "description": "The canonical meta-specification for the Imvara Invocation Framework—defining how brands, products, services, signals, schemas, diagnostics, maturity, and agent decision pathways enable AI systems to select entities with reliability, safety, and confidence.",
+  "version": "0.1.0",
+  "maintainer": "Imvara",
+  "homepage": "https://imvara.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremysanchez2/invocation-framework"
+  },
 
+  "components": {
+    "definitions": {
+      "description": "Canonical definitions for Invocation concepts and terminology.",
+      "files": [
+        "definitions/invocation.md",
+        "definitions/invocation-architecture.md",
+        "definitions/invocation-readiness.md",
+        "definitions/invocation-drift.md",
+        "definitions/discovery-gap.md",
+        "definitions/glossary.md"
+      ]
+    },
+    "architecture": {
+      "description": "The structural model that defines how Invocation works across entities, signals, governance, pathways, and agent-safe design.",
+      "files": [
+        "architecture/01-architecture-overview.md",
+        "architecture/02-entity-governance.md",
+        "architecture/03-structured-content.md",
+        "architecture/04-ai-decision-pathways.md",
+        "architecture/05-agent-safe-design.md",
+        "architecture/architecture.json"
+      ]
+    },
+    "maturity_model": {
+      "description": "The Crawl → Walk → Run progression for Invocation Readiness.",
+      "files": [
+        "maturity-model/crawl.md",
+        "maturity-model/walk.md",
+        "maturity-model/run.md"
+      ]
+    },
+    "diagnostics": {
+      "description": "Tools to detect Invocation Drift, Discovery Gaps, Signal Failures, and Entity Fragility.",
+      "files": [
+        "diagnostics/discovery-gap-diagnostic.md",
+        "diagnostics/drift-identification.md",
+        "diagnostics/entity-map-checklist.md",
+        "diagnostics/signal-audit-template.md"
+      ]
+    },
+    "schemas": {
+      "description": "Machine-readable JSON schemas modeling brands, products, services, events, signals, pathways, and graph relations.",
+      "files": [
+        "schemas/invocation-entity-schema.json",
+        "schemas/invocation-signal-schema.json",
+        "schemas/invocation-decision-pathway-schema.json",
+        "schemas/invocation-event-schema.json",
+        "schemas/brand-schema.json",
+        "schemas/product-schema.json",
+        "schemas/service-schema.json",
+        "schemas/graph-relations.json"
+      ]
+    },
+    "protocol": {
+      "description": "The Invocation Protocol describing how agents resolve intent, choose entities, and generate outcomes.",
+      "files": [
+        "invocation-protocol/invocation-protocol-v0.1.md"
+      ]
+    },
+    "invocation_os": {
+      "description": "The operating framework that defines Invocation data contracts, governance, and agent behaviors.",
+      "files": [
+        "invocation-os/invocation-os-spec-v0.1.md"
+      ]
+    },
+    "examples": {
+      "description": "Industry-specific Invocation patterns and applied demonstrations.",
+      "files": [
+        "examples/automotive-example.md",
+        "examples/hospitality-example.md",
+        "examples/insurance-example.md",
+        "examples/retail-example.md",
+        "examples/structured-content-example.json",
+        "examples/decision-pathway-example.json"
+      ]
+    },
+    "tests": {
+      "description": "LLM-oriented test suites for Invocation behavior validation.",
+      "files": [
+        "tests/invocation-tests.md",
+        "tests/llm-qa-tests.json",
+        "tests/entity-audit-tests.json",
+        "tests/pathway-evaluation-tests.json"
+      ]
+    }
+  }
+}
