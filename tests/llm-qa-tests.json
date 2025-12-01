@@ -1,14 +1,26 @@
 {
-  "tests": [
+  "test_name": "LLM QA Benchmark Tests",
+  "description": "Evaluates whether an LLM produces invocation-ready answers aligned with the Invocation Architecture.",
+  "test_inputs": [
     {
-      "id": "qa-001",
-      "intent": "define invocation architecture",
-      "expected_keywords": ["AI systems", "entity resolution", "structured signals", "decision pathways"]
+      "query": "What’s the best air purifier under $300?",
+      "expected": {
+        "domain": "retail",
+        "intent": "product_comparison",
+        "entities_resolved": true,
+        "signals_used": ["rating_score", "noise_level_db", "CADR_score"],
+        "explanation_required": true
+      }
     },
     {
-      "id": "qa-002",
-      "intent": "what causes invocation drift",
-      "expected_keywords": ["misalignment", "stale content", "signal degradation", "entity instability"]
+      "query": "Which travel insurance plan should I pick for international trips?",
+      "expected": {
+        "domain": "insurance",
+        "intent": "plan_recommendation",
+        "entities_resolved": true,
+        "mandatory_constraints": ["travel_type", "budget_range"],
+        "outcome_type": "best_fit_plan"
+      }
     }
   ]
 }
