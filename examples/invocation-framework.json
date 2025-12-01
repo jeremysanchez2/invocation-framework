@@ -1,1 +1,42 @@
+{
+  "version": "0.1",
+  "updated": "2025-12-01",
+  "maintainer": "Imvara",
+  "description": "Top-level validation manifest for testing Invocation Framework compliance across entities, signals, pathways, and end-to-end invocation behavior.",
 
+  "test_suites": {
+    "entity_validation": {
+      "schema": "schemas/invocation-entity-schema.json",
+      "examples": [
+        "examples/test-entity-schema.json"
+      ]
+    },
+
+    "signal_validation": {
+      "schema": "schemas/invocation-signal-schema.json",
+      "examples": [
+        "examples/test-signal-schema.json"
+      ]
+    },
+
+    "decision_pathway_validation": {
+      "schema": "schemas/invocation-decision-pathway-schema.json",
+      "examples": [
+        "examples/test-decision-pathway.json"
+      ]
+    },
+
+    "end_to_end_invocation": {
+      "description": "Ensures an agent can move from intent → entities → signals → pathway → validated output per Invocation Protocol v0.1.",
+      "required_outputs": [
+        "decision_pathway_used",
+        "entities_evaluated",
+        "signals_used",
+        "constraints_applied",
+        "recommendation_result",
+        "explanation"
+      ],
+      "protocol_reference": "invocation-protocol/invocation-protocol-v0.1.md"
+    }
+  }
+}
