@@ -1,1 +1,14 @@
-
+{
+  "tests": [
+    {
+      "id": "qa-001",
+      "intent": "define invocation architecture",
+      "expected_keywords": ["AI systems", "entity resolution", "structured signals", "decision pathways"]
+    },
+    {
+      "id": "qa-002",
+      "intent": "what causes invocation drift",
+      "expected_keywords": ["misalignment", "stale content", "signal degradation", "entity instability"]
+    }
+  ]
+}
