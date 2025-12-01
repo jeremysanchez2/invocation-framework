@@ -1,1 +1,124 @@
+{
+  "@context": {
+    "inv": "https://imvara.io/invocation-framework#",
+    "schema": "https://schema.org/",
+    "id": "@id",
+    "type": "@type"
+  },
 
+  "id": "inv:InvocationProtocol",
+  "type": "inv:Specification",
+  "version": "0.1",
+  "maintainer": "Imvara",
+  "updated": "2025-12-01",
+
+  "description": "The Invocation Protocol defines the required output structure, validation obligations, version metadata, and safety rules for all Invocation-compliant AI reasoning systems. It guarantees consistency, determinism, transparency, and enterprise safety across all model responses.",
+
+  "required_output_contract": {
+    "type": "inv:InvocationOutputContract",
+
+    "fields": {
+      "decision_pathway_used": {
+        "type": "string",
+        "description": "Identifier of the specific Decision Pathway executed.",
+        "required": true
+      },
+      "entities_evaluated": {
+        "type": "array",
+        "items": "string",
+        "description": "List of structured entity identifiers evaluated.",
+        "required": true
+      },
+      "signals_used": {
+        "type": "array",
+        "items": "string",
+        "description": "All signals (attributes) referenced during decision-making.",
+        "required": true
+      },
+      "constraints_applied": {
+        "type": "array",
+        "items": "string",
+        "description": "All constraints (hard and soft) that shaped the decision space.",
+        "required": true
+      },
+      "pathway_steps": {
+        "type": "array",
+        "items": "object",
+        "description": "Ordered steps taken by the reasoning engine.",
+        "required": true
+      },
+      "ranked_results": {
+        "type": "array",
+        "items": "object",
+        "description": "Decision results returned in ranked or selected form.",
+        "required": true
+      },
+      "explanation_available": {
+        "type": "boolean",
+        "description": "Indicates whether a human-readable explanation is stored or retrievable.",
+        "required": true
+      },
+      "explanation_reference": {
+        "type": "string",
+        "description": "Optional URI pointer to explanation text, pathway log, or metadata.",
+        "required": false
+      },
+      "confidence_score": {
+        "type": "number",
+        "description": "System-level confidence score for the final decision.",
+        "required": false
+      },
+      "safety_checks": {
+        "type": "object",
+        "description": "Safety gating and validation layer results.",
+        "required": true,
+        "properties": {
+          "disallowed_entities_filtered": {
+            "type": "array",
+            "items": "string",
+            "required": false
+          },
+          "incomplete_signals_detected": {
+            "type": "array",
+            "items": "string",
+            "required": false
+          },
+          "fallback_pathway_triggered": {
+            "type": "boolean",
+            "required": false
+          }
+        }
+      }
+    }
+  },
+
+  "validation_rules": {
+    "type": "inv:ValidationRules",
+    "rules": [
+      {
+        "id": "rule:required-fields",
+        "description": "All required fields MUST be present for protocol compliance."
+      },
+      {
+        "id": "rule:entity-resolution",
+        "description": "All entities referenced must exist in governed schemas."
+      },
+      {
+        "id": "rule:signal-resolution",
+        "description": "All signals MUST correspond to declared signals in the signal schema."
+      },
+      {
+        "id": "rule:pathway-determinism",
+        "description": "Pathway execution MUST be deterministic for identical inputs."
+      },
+      {
+        "id": "rule:ranked-order",
+        "description": "Ranked output MUST be ordered highest to lowest relevance or utility."
+      },
+      {
+        "id": "rule:explanation-integrity",
+        "description": "If explanation_available = true, a retrievable explanation MUST exist."
+      }
+    ]
+  }
+}
