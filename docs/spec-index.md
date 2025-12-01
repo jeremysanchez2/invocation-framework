@@ -35,12 +35,14 @@ Each spec is independently versioned and may evolve over time while maintaining 
 ## 2. Directory Structure
 This index serves as the authoritative registry linking all underlying components of the Invocation Framework.
 
+```
 /docs
 ├── spec-index.md
 ├── spec-architecture.md
 ├── spec-governance.md
 ├── spec-pathways.md
 ├── spec-validation.md
+
 /specs
 ├── schemas/
 ├── definitions/
@@ -48,7 +50,7 @@ This index serves as the authoritative registry linking all underlying component
 ├── examples/
 ├── invocation-os/
 ├── invocation-protocol/
-
+```
 ---
 
 ## 3. Compliance Levels
