@@ -1,3 +1,4 @@
+```json
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
@@ -22,6 +23,7 @@
     "AI discoverability"
   ]
 }
+```
 
 # Imvara Invocation Framework
 
