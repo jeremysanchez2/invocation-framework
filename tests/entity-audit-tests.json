@@ -1,1 +1,13 @@
-
+{
+  "entity_audit_tests": [
+    {
+      "entity": "mazda_cx5_2025",
+      "checks": [
+        "schema_completeness",
+        "signal_presence",
+        "metadata_accuracy",
+        "governance_owner_exists"
+      ]
+    }
+  ]
+}
