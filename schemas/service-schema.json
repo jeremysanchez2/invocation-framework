@@ -1,1 +1,30 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Invocation Service Schema",
+  "description": "Canonical definition of a service entity for Invocation-aware systems.",
+  "type": "object",
+  "properties": {
+    "service_id": { "type": "string" },
+    "brand_id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "category": { "type": "string" },
+    "service_area": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "pricing_model": {
+      "type": "string",
+      "enum": ["subscription", "one-time", "tiered", "usage-based", "custom"]
+    },
+    "delivery_channels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "signals": {
+      "type": "array",
+      "items": { "$ref": "invocation-signal-schema.json" }
+    }
+  },
+  "required": ["service_id", "brand_id", "name"]
+}
