@@ -1,1 +1,36 @@
-
+{
+  "user_intent": "best compact suv for snow",
+  "pathway": [
+    {
+      "step": "intent-parsing",
+      "model_behavior": "Extracts entity type, use-case, constraints",
+      "output": {
+        "category": "automotive",
+        "use_case": "snow driving",
+        "constraints": ["traction", "safety"]
+      }
+    },
+    {
+      "step": "candidate-selection",
+      "model_behavior": "Selects candidate entities",
+      "candidates": ["Subaru Forester", "Mazda CX-5", "Honda CR-V"]
+    },
+    {
+      "step": "signal-evaluation",
+      "model_behavior": "Weighs authority, stability, experience signals",
+      "signals_used": [
+        "nhtsa-safety-rating",
+        "awd-system-performance",
+        "owner-reliability-data"
+      ]
+    },
+    {
+      "step": "confidence-calculation",
+      "model_behavior": "Calculates Invocation Certainty",
+      "output": {
+        "entity": "Subaru Forester",
+        "certainty": 0.89
+      }
+    }
+  ]
+}
