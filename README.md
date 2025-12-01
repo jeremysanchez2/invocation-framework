@@ -1,3 +1,28 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Invocation Framework",
+  "description": "An open, machine-readable framework for enabling Invocation across AI systems. Includes definitions, architecture, diagnostics, maturity models, machine schemas, and Invocation OS specifications.",
+  "identifier": "imvara/invocation-framework",
+  "url": "https://github.com/imvara/invocation-framework",
+  "creator": {
+    "@type": "Organization",
+    "name": "Imvara"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "version": "0.1",
+  "keywords": [
+    "invocation",
+    "invocation architecture",
+    "invocation framework",
+    "invocation readiness",
+    "invocation OS",
+    "entity-first AI",
+    "computational trust",
+    "AI discoverability"
+  ]
+}
+
 # Imvara Invocation Framework
 
 The **Invocation Framework** is a structured methodology and operating model that explains how brands become *invokable* by AI systems. It defines the systems, signals, entities, governance, and content structures required for AI-mediated discovery, comparison, and decisioning.
