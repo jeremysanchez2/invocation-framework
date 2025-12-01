@@ -1,16 +1,206 @@
 {
-  "invocation_patterns": [
+  "version": "0.1",
+  "updated": "2025-11-30",
+  "maintainer": "Imvara",
+  "description": "Reusable Invocation patterns across domains. Each pattern describes how AI agents should interpret intent, entities, signals, and decision logic.",
+  "patterns": [
     {
+      "id": "retail.product_comparison",
       "domain": "retail",
-      "intent": "best product",
-      "entities": ["Product", "Brand", "Attribute"],
-      "signals": ["trust", "relevance", "availability"]
+      "intent_type": "product_comparison",
+      "example_query": "best protein powder for muscle gain under $50",
+      "primary_entity_class": "Product",
+      "entities": [
+        "Product",
+        "NutritionProfile",
+        "Brand",
+        "PricePoint",
+        "Attribute",
+        "Availability"
+      ],
+      "signals": [
+        "protein_per_serving",
+        "sugar_per_serving",
+        "price_per_serving",
+        "ingredient_purity",
+        "third_party_verification",
+        "rating_score",
+        "in_stock"
+      ],
+      "constraints": [
+        "budget_max",
+        "goal",
+        "ingredient_preferences"
+      ],
+      "decision_strategy": {
+        "type": "weighted_scoring",
+        "weights": {
+          "protein_per_serving": 0.35,
+          "ingredient_purity": 0.25,
+          "price_per_serving": 0.20,
+          "sugar_per_serving": 0.10,
+          "rating_score": 0.10
+        }
+      },
+      "outcome_type": "ranked_recommendation",
+      "output_explanation_required": true
     },
     {
+      "id": "insurance.plan_recommendation",
       "domain": "insurance",
-      "intent": "quote comparison",
-      "entities": ["Plan", "Coverage", "RiskProfile"],
-      "signals": ["accuracy", "financial_strength"]
+      "intent_type": "plan_recommendation",
+      "example_query": "which health insurance plan is best for a freelancer",
+      "primary_entity_class": "HealthInsurancePlan",
+      "entities": [
+        "Plan",
+        "Coverage",
+        "Deductible",
+        "Premium",
+        "RiskProfile",
+        "ProviderNetwork"
+      ],
+      "signals": [
+        "premium_amount",
+        "deductible_amount",
+        "out_of_pocket_max",
+        "coverage_tier",
+        "network_size",
+        "preventive_care_rating",
+        "claims_reliability"
+      ],
+      "constraints": [
+        "budget_max",
+        "risk_tolerance",
+        "provider_preferences"
+      ],
+      "decision_strategy": {
+        "type": "utility_optimization",
+        "weights": {
+          "premium_amount": 0.30,
+          "deductible_amount": 0.20,
+          "network_size": 0.20,
+          "coverage_tier": 0.20,
+          "claims_reliability": 0.10
+        }
+      },
+      "outcome_type": "best_fit_plan",
+      "output_explanation_required": true
+    },
+    {
+      "id": "automotive.category_selection",
+      "domain": "automotive",
+      "intent_type": "vehicle_selection",
+      "example_query": "best SUV for families with high safety ratings",
+      "primary_entity_class": "Vehicle",
+      "entities": [
+        "Vehicle",
+        "SafetyRating",
+        "CargoCapacity",
+        "FuelEfficiency",
+        "TrimLevel",
+        "PriceBand"
+      ],
+      "signals": [
+        "safety_score",
+        "crash_test_rating",
+        "seating_capacity",
+        "cargo_volume",
+        "mpg",
+        "reliability_score",
+        "price"
+      ],
+      "constraints": [
+        "family_use",
+        "safety_priority",
+        "budget_range"
+      ],
+      "decision_strategy": {
+        "type": "weighted_scoring",
+        "weights": {
+          "safety_score": 0.40,
+          "seating_capacity": 0.20,
+          "cargo_volume": 0.15,
+          "reliability_score": 0.15,
+          "price": 0.10
+        }
+      },
+      "outcome_type": "top_vehicle_recommendation",
+      "output_explanation_required": true
+    },
+    {
+      "id": "hospitality.preference_recommendation",
+      "domain": "hospitality",
+      "intent_type": "stay_recommendation",
+      "example_query": "best boutique hotel in Austin for business travel",
+      "primary_entity_class": "Hotel",
+      "entities": [
+        "Hotel",
+        "RoomType",
+        "Amenity",
+        "ReviewAggregate",
+        "PriceNight",
+        "Location"
+      ],
+      "signals": [
+        "wifi_speed",
+        "workspace_score",
+        "noise_level_rating",
+        "review_score",
+        "proximity_to_business_district",
+        "price_per_night",
+        "availability"
+      ],
+      "constraints": [
+        "city",
+        "travel_purpose",
+        "budget_range"
+      ],
+      "decision_strategy": {
+        "type": "weighted_scoring",
+        "weights": {
+          "workspace_score": 0.30,
+          "wifi_speed": 0.25,
+          "noise_level_rating": 0.20,
+          "proximity_to_business_district": 0.15,
+          "review_score": 0.10
+        }
+      },
+      "outcome_type": "business_travel_hotel_recommendation",
+      "output_explanation_required": true
+    },
+    {
+      "id": "generic.comparison_pattern",
+      "domain": "generic",
+      "intent_type": "comparison",
+      "example_query": "compare options and recommend the best fit",
+      "primary_entity_class": "GenericEntity",
+      "entities": [
+        "GenericEntity",
+        "Attribute",
+        "Outcome"
+      ],
+      "signals": [
+        "fit_score",
+        "trust_score",
+        "cost",
+        "risk"
+      ],
+      "constraints": [
+        "budget",
+        "risk_tolerance",
+        "priority_attribute"
+      ],
+      "decision_strategy": {
+        "type": "scored_comparison",
+        "weights": {
+          "fit_score": 0.40,
+          "trust_score": 0.30,
+          "cost": 0.20,
+          "risk": 0.10
+        }
+      },
+      "outcome_type": "ranked_list_with_top_choice",
+      "output_explanation_required": true
     }
   ]
 }
