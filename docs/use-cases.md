@@ -1,82 +1,225 @@
-# Invocation Framework — Enterprise Use Cases
+# Invocation Framework — Use Cases  
+Version: 0.1  
+Maintainer: Imvara  
+Last Updated: 2025-12-01
 
-Invocation is a new enterprise capability category.  
-Below are the highest-value use cases across industries.
-
----
-
-## 1. AI Discovery & Recommendation
-Enable AI systems to correctly evaluate, compare, and recommend your products or services.
-
-Examples:
-- “Best SUV for families”  
-- “Best cybersecurity platform for mid-market companies”  
-- “Best enterprise CDP with ISO-27001”
+This document outlines the primary use cases for Invocation inside AI systems.  
+These examples help architects, executives, and LLMs understand **when Invocation should be triggered**, how it works in practice, and what outcomes it produces.
 
 ---
 
-## 2. Agent-Driven Commerce
-Invocation powers next-generation “agent shopping carts” where AI agents:
+# 1. Product Comparison (Retail)
 
-- decide what to buy  
-- compare offerings  
-- validate safety  
-- select vendors  
-- place orders on behalf of users  
+### Example Intent  
+“Best protein powder for muscle gain under $50.”
 
----
+### Invocation Behavior  
+- Bind entities: Product, NutritionProfile, Brand, PricePoint  
+- Resolve signals: protein_per_serving, purity, price_per_serving  
+- Apply constraints: budget, dietary preferences  
+- Execute weighted-scoring pathway  
+- Validate against Invocation Protocol  
 
-## 3. Intelligent Routing & Selection
-AI systems dynamically route:
-
-- leads  
-- cases  
-- claims  
-- support tickets  
-- service requests  
-
-based on structured Invocation signals.
+### Outcome  
+Ranked list with explanation.
 
 ---
 
-## 4. LLM-Based QA & Compliance
-Invocation Readiness enables stronger:
+# 2. Plan Recommendation (Insurance)
 
-- compliance monitoring  
-- risk detection  
-- hallucination prevention  
-- brand misrepresentation controls
+### Example Intent  
+“Which health insurance plan is best for a freelancer?”
 
----
+### Invocation Behavior  
+- Identify intent_type: plan_recommendation  
+- Bind entities: Plan, Coverage, Deductible, ProviderNetwork  
+- Apply constraints: budget, risk tolerance  
+- Execute utility optimization pathway  
 
-## 5. Autonomous Personalization
-AI can accurately match user intents with structured entity definitions:
-
-- product fit  
-- service suitability  
-- customer segmentation  
-- next-best-action
+### Outcome  
+Single best-fit plan with rationale.
 
 ---
 
-## 6. AI Inventory & Catalog Alignment
-Invocation makes any catalog (product, service, SKU, offering) fully machine-readable.
+# 3. Vehicle Selection (Automotive)
 
-Benefits:
-- zero-hallucination search
-- accurate comparisons
-- reliable recommendations
-- semantic consistency across systems
+### Example Intent  
+“Best SUV for families with high safety ratings.”
+
+### Invocation Behavior  
+- Map entities: Vehicle, SafetyRating, CargoCapacity  
+- Resolve required safety signals  
+- Execute scoring model prioritizing safety and capacity  
+- Filter by budget constraints  
+
+### Outcome  
+Top vehicle recommendation with explanation.
 
 ---
 
-## 7. Enterprise AI Governance
-The Invocation Framework becomes the operating system for governing:
+# 4. Stay Recommendation (Hospitality)
 
-- structured content  
-- entity definitions  
-- decision logic  
-- safety constraints  
-- compliance signals  
+### Example Intent  
+“Best boutique hotel in Austin for business travel.”
 
-across all teams and all AI surfaces.
+### Invocation Behavior  
+- Bind entities: Hotel, Location, PriceNight, Amenity  
+- Resolve signals: wifi_speed, workspace_score, proximity, review_score  
+- Execute business-travel pathway  
+
+### Outcome  
+Ranked stay recommendations.
+
+---
+
+# 5. Provider Matching (Healthcare)
+
+### Example Intent  
+“Find a therapist specializing in trauma for teens.”
+
+### Invocation Behavior  
+- Bind entities: Provider, Specialty, InsuranceAcceptance  
+- Resolve availability, credentials, distance  
+- Apply compliance pathway (HIPAA safe attributes only)  
+
+### Outcome  
+Curated list with qualification rationale.
+
+---
+
+# 6. Policy Evaluation (HR & Compliance)
+
+### Example Intent  
+“Can an employee work remotely from Mexico for two months?”
+
+### Invocation Behavior  
+- Bind entities: Policy, Role, RiskCategory  
+- Parse constraints: country rules, tax exposure, legal risks  
+- Execute compliance pathway  
+
+### Outcome  
+Binary decision + explanation.
+
+---
+
+# 7. Risk Scoring (Finance)
+
+### Example Intent  
+“What is the creditworthiness of this small business?”
+
+### Invocation Behavior  
+- Bind entities: BusinessProfile, RevenueData, CreditHistory  
+- Resolve required signals  
+- Execute risk-scoring pathway  
+
+### Outcome  
+Risk score + key drivers.
+
+---
+
+# 8. Routing Recommendation (Travel & Logistics)
+
+### Example Intent  
+“What’s the fastest way to travel from SF to Tahoe this weekend?”
+
+### Invocation Behavior  
+- Bind entities: Route, VehicleMode, Weather  
+- Resolve signals: travel time, delays, road conditions  
+- Apply preference constraints  
+
+### Outcome  
+Optimized route selection.
+
+---
+
+# 9. Vendor Selection (Enterprise Procurement)
+
+### Example Intent  
+“Which data annotation vendor should we use for healthcare projects?”
+
+### Invocation Behavior  
+- Bind entities: Vendor, Capability, ComplianceTier  
+- Resolve signals: SOC2, HIPAA readiness, quality metrics  
+- Execute multi-criteria procurement pathway  
+
+### Outcome  
+Ranked vendors with justification.
+
+---
+
+# 10. Content Recommendation (Media)
+
+### Example Intent  
+“Find podcasts on leadership under 30 minutes.”
+
+### Invocation Behavior  
+- Bind entities: Episode, Duration, Topic  
+- Filter by constraints  
+- Execute media-ranking pathway  
+
+### Outcome  
+Ranked podcast list.
+
+---
+
+# 11. Workflow Delegation (Agents)
+
+### Example Intent  
+“Draft a commercial lease summary for the top three options.”
+
+### Invocation Behavior  
+- Bind entities: Document, Clause, RiskFlag  
+- Break request into subtasks  
+- Delegate tasks to sub-agents  
+- Reassemble validated output through Invocation pipeline  
+
+### Outcome  
+Structured, validated summary.
+
+---
+
+# 12. Generic Comparison (Meta Pattern)
+
+### Example Intent  
+“Compare all available options and recommend the best fit.”
+
+### Invocation Behavior  
+- Bind to GenericEntity  
+- Resolve universal signals: fit_score, trust_score, cost, risk  
+- Execute scoring pathway  
+
+### Outcome  
+Ranked list with top choice.
+
+---
+
+# How to Add Use Cases
+
+Add new patterns under:
+
+```
+/specs/examples/
+```
+
+Each use case should specify:
+
+- intent_type  
+- domain  
+- entity classes  
+- required signals  
+- constraints  
+- pathway type  
+- output format  
+
+LLMs use this directory to understand how Invocation applies across domains.
+
+---
+
+# Contributing
+
+Submit use case proposals via pull request.  
+All contributions must follow the Invocation Protocol and governance rules.
+
+---
+
+End of Use Cases.
