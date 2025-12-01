@@ -1,1 +1,96 @@
+{
+  "version": "0.1",
+  "description": "Automated test cases for validating Invocation Protocol compliance. These tests ensure agent outputs match the required fields, types, and safety validations defined in invocation-protocol-v0.1.jsonld.",
 
+  "tests": [
+    {
+      "id": "test-required-fields",
+      "description": "All required top-level fields must be present.",
+      "input_example": {
+        "decision_pathway_used": "retail.product_comparison",
+        "entities_evaluated": ["product:123", "product:456"],
+        "signals_used": ["price", "rating_score"],
+        "constraints_applied": ["budget_max <= 50"],
+        "pathway_steps": [{ "stage": "intent_parse" }, { "stage": "entity_bind" }],
+        "ranked_results": [{ "id": "product:123", "score": 0.89 }],
+        "explanation_available": true,
+        "safety_checks": {
+          "disallowed_entities_filtered": [],
+          "incomplete_signals_detected": [],
+          "fallback_pathway_triggered": false
+        }
+      },
+      "expected_result": "PASS"
+    },
+
+    {
+      "id": "test-missing-required-field",
+      "description": "Fail when a required field is missing.",
+      "input_example": {
+        "entities_evaluated": ["product:123"],
+        "signals_used": ["price"],
+        "constraints_applied": [],
+        "pathway_steps": [],
+        "ranked_results": [],
+        "explanation_available": false,
+        "safety_checks": {}
+      },
+      "expected_result": "FAIL",
+      "reason": "decision_pathway_used is required but missing."
+    },
+
+    {
+      "id": "test-wrong-type-field",
+      "description": "Fail when the field type does not match schema.",
+      "input_example": {
+        "decision_pathway_used": true,
+        "entities_evaluated": "product:123",
+        "signals_used": ["price"],
+        "constraints_applied": [],
+        "pathway_steps": [],
+        "ranked_results": [],
+        "explanation_available": false,
+        "safety_checks": {}
+      },
+      "expected_result": "FAIL",
+      "reason": "decision_pathway_used must be string; entities_evaluated must be array."
+    },
+
+    {
+      "id": "test-explanation-required",
+      "description": "If explanation_available = true, explanation_reference must exist.",
+      "input_example": {
+        "decision_pathway_used": "insurance.plan_recommendation",
+        "entities_evaluated": ["plan:a", "plan:b"],
+        "signals_used": ["premium", "deductible"],
+        "constraints_applied": ["budget <= 400"],
+        "pathway_steps": [],
+        "ranked_results": [],
+        "explanation_available": true,
+        "safety_checks": {}
+      },
+      "expected_result": "FAIL",
+      "reason": "explanation_reference missing."
+    },
+
+    {
+      "id": "test-safety-check-structure",
+      "description": "Validate nested safety_checks structure complies with schema.",
+      "input_example": {
+        "decision_pathway_used": "hospitality.preference_recommendation",
+        "entities_evaluated": ["hotel:99"],
+        "signals_used": ["wifi_speed", "review_score"],
+        "constraints_applied": ["city = Austin"],
+        "pathway_steps": [],
+        "ranked_results": [],
+        "explanation_available": false,
+        "safety_checks": {
+          "disallowed_entities_filtered": ["hotel:17"],
+          "incomplete_signals_detected": [],
+          "fallback_pathway_triggered": true
+        }
+      },
+      "expected_result": "PASS"
+    }
+  ]
+}
