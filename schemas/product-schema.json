@@ -1,1 +1,44 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Invocation Product Schema",
+  "description": "Canonical definition of a product entity for Invocation-aware systems.",
+  "type": "object",
+  "properties": {
+    "product_id": { "type": "string" },
+    "brand_id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "category": { "type": "string" },
+    "images": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "price": {
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "currency": { "type": "string" }
+      }
+    },
+    "availability": { "type": "string", "enum": ["in-stock", "backorder", "out-of-stock"] },
+    "specifications": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rating": { "type": "number" },
+          "review_text": { "type": "string" }
+        }
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": { "$ref": "invocation-signal-schema.json" }
+    }
+  },
+  "required": ["product_id", "brand_id", "name"]
+}
