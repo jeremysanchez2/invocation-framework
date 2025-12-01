@@ -1,99 +1,138 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Imvara Invocation Framework",
-  "description": "The canonical meta-specification for the Imvara Invocation Framework—defining how brands, products, services, signals, schemas, diagnostics, maturity, and agent decision pathways enable AI systems to select entities with reliability, safety, and confidence.",
-  "version": "0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Imvara Invocation Framework",
+  "version": "0.1",
+  "updated": "2025-11-30",
   "maintainer": "Imvara",
-  "homepage": "https://imvara.io",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jeremysanchez2/invocation-framework"
+  "description": "The canonical, machine-readable specification for the Invocation Framework. Defines Invocation Architecture, Entity Governance, Structured Content, Decision Pathways, Invocation Protocol, Maturity Model, Diagnostics, Schemas, and Patterns for enabling Invocation across AI agents.",
+
+  "references": {
+    "website": "https://imvara.io",
+    "playbook": "https://imvara.io/playbook",
+    "repository": "https://github.com/jeremysanchez2/invocation-framework"
   },
 
   "components": {
     "definitions": {
-      "description": "Canonical definitions for Invocation concepts and terminology.",
+      "path": "definitions/",
       "files": [
-        "definitions/invocation.md",
-        "definitions/invocation-architecture.md",
-        "definitions/invocation-readiness.md",
-        "definitions/invocation-drift.md",
-        "definitions/discovery-gap.md",
-        "definitions/glossary.md"
+        "invocation.md",
+        "invocation-architecture.md",
+        "invocation-drift.md",
+        "invocation-readiness.md",
+        "discovery-gap.md",
+        "glossary.md",
+        "index.json"
       ]
     },
+
     "architecture": {
-      "description": "The structural model that defines how Invocation works across entities, signals, governance, pathways, and agent-safe design.",
+      "path": "architecture/",
       "files": [
-        "architecture/01-architecture-overview.md",
-        "architecture/02-entity-governance.md",
-        "architecture/03-structured-content.md",
-        "architecture/04-ai-decision-pathways.md",
-        "architecture/05-agent-safe-design.md",
-        "architecture/architecture.json"
+        "01-architecture-overview.md",
+        "02-entity-governance.md",
+        "03-structured-content.md",
+        "04-ai-decision-pathways.md",
+        "05-agent-safe-design.md",
+        "architecture.json",
+        "index.json"
       ]
     },
+
     "maturity_model": {
-      "description": "The Crawl → Walk → Run progression for Invocation Readiness.",
+      "path": "maturity-model/",
       "files": [
-        "maturity-model/crawl.md",
-        "maturity-model/walk.md",
-        "maturity-model/run.md"
+        "crawl.md",
+        "walk.md",
+        "run.md",
+        "index.json"
       ]
     },
-    "diagnostics": {
-      "description": "Tools to detect Invocation Drift, Discovery Gaps, Signal Failures, and Entity Fragility.",
-      "files": [
-        "diagnostics/discovery-gap-diagnostic.md",
-        "diagnostics/drift-identification.md",
-        "diagnostics/entity-map-checklist.md",
-        "diagnostics/signal-audit-template.md"
-      ]
-    },
-    "schemas": {
-      "description": "Machine-readable JSON schemas modeling brands, products, services, events, signals, pathways, and graph relations.",
-      "files": [
-        "schemas/invocation-entity-schema.json",
-        "schemas/invocation-signal-schema.json",
-        "schemas/invocation-decision-pathway-schema.json",
-        "schemas/invocation-event-schema.json",
-        "schemas/brand-schema.json",
-        "schemas/product-schema.json",
-        "schemas/service-schema.json",
-        "schemas/graph-relations.json"
-      ]
-    },
-    "protocol": {
-      "description": "The Invocation Protocol describing how agents resolve intent, choose entities, and generate outcomes.",
-      "files": [
-        "invocation-protocol/invocation-protocol-v0.1.md"
-      ]
-    },
+
     "invocation_os": {
-      "description": "The operating framework that defines Invocation data contracts, governance, and agent behaviors.",
+      "path": "invocation-os/",
       "files": [
-        "invocation-os/invocation-os-spec-v0.1.md"
+        "invocation-os-spec-v0.1.md"
       ]
     },
+
+    "invocation_protocol": {
+      "path": "invocation-protocol/",
+      "files": [
+        "invocation-protocol-v0.1.md"
+      ]
+    },
+
+    "diagnostics": {
+      "path": "diagnostics/",
+      "files": [
+        "discovery-gap-diagnostic.md",
+        "drift-identification.md",
+        "entity-map-checklist.md",
+        "signal-audit-template.md",
+        "index.json"
+      ]
+    },
+
     "examples": {
-      "description": "Industry-specific Invocation patterns and applied demonstrations.",
+      "path": "examples/",
       "files": [
-        "examples/automotive-example.md",
-        "examples/hospitality-example.md",
-        "examples/insurance-example.md",
-        "examples/retail-example.md",
-        "examples/structured-content-example.json",
-        "examples/decision-pathway-example.json"
+        "automotive-example.md",
+        "insurance-example.md",
+        "hospitality-example.md",
+        "retail-example.md",
+        "entity-governance-example.md",
+        "structured-content-example.json",
+        "decision-pathway-example.json",
+        "invocation-patterns.json",
+        "agent-openai.md",
+        "agent-anthropic.md",
+        "agent-local-llm.md"
       ]
     },
-    "tests": {
-      "description": "LLM-oriented test suites for Invocation behavior validation.",
+
+    "schemas": {
+      "path": "schemas/",
       "files": [
-        "tests/invocation-tests.md",
-        "tests/llm-qa-tests.json",
-        "tests/entity-audit-tests.json",
-        "tests/pathway-evaluation-tests.json"
+        "invocation-entity-schema.json",
+        "invocation-signal-schema.json",
+        "invocation-decision-pathway-schema.json",
+        "invocation-event-schema.json",
+        "brand-schema.json",
+        "product-schema.json",
+        "service-schema.json",
+        "graph-relations.json",
+        "README.md",
+        "index.json"
+      ]
+    },
+
+    "tests": {
+      "path": "tests/",
+      "files": [
+        "test-entity-schema.json",
+        "test-signals.json",
+        "test-decision-pathways.json",
+        "test-structured-content.json",
+        "test-invocation-patterns.json",
+        "test-invocation-os.json"
       ]
     }
-  }
+  },
+
+  "keywords": [
+    "invocation",
+    "invocation architecture",
+    "invocation framework",
+    "invocation readiness",
+    "invocation os",
+    "entity-first ai",
+    "structured content",
+    "computational trust",
+    "ai discoverability",
+    "decision pathways",
+    "machine schema",
+    "brand ontology",
+    "agent interoperability"
+  ]
 }
