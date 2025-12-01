@@ -1,1 +1,19 @@
-
+{
+  "test_name": "Schema-Level Decision Pathway Validation",
+  "version": "0.1",
+  "expected_schema_fields": {
+    "required": ["intent", "steps"],
+    "step_structure": ["step_id", "action", "inputs", "outputs"]
+  },
+  "sample_valid_path": {
+    "intent": "vehicle_selection",
+    "steps": [
+      {
+        "step_id": 1,
+        "action": "parse_intent",
+        "inputs": ["NL_query"],
+        "outputs": ["intent_type"]
+      }
+    ]
+  }
+}
